@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linear_layout_homepage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/logo_image"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="@dimen/homepage_spacing"
+            android:contentDescription="@string/app_name"
+            app:srcCompat="@drawable/logo" />
+
+        <Button
+            android:id="@+id/create_song_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/homepage_spacing"
+            android:layout_marginRight="@dimen/homepage_button_margin"
+            android:layout_marginLeft="@dimen/homepage_button_margin"
+            android:text="@string/create_song_button"
+            android:background="@color/colorPrimaryDark"
+            />
+
+        <Button
+            android:id="@+id/browse_songs_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/homepage_spacing"
+            android:layout_marginRight="@dimen/homepage_button_margin"
+            android:layout_marginLeft="@dimen/homepage_button_margin"
+            android:text="@string/browse_songs_button"
+            android:background="@color/colorPrimaryDark" />
+    </LinearLayout>
+
+
+</RelativeLayout>

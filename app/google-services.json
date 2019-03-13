@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1055695443506",
+    "firebase_url": "https://symphone-c00208873.firebaseio.com",
+    "project_id": "symphone-c00208873",
+    "storage_bucket": "symphone-c00208873.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1055695443506:android:fad1013b1e7e66eb",
+        "android_client_info": {
+          "package_name": "com.example.jamier.symphone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1055695443506-hcqgi2aagoff272t10uudbehv2cvne83.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jamier.symphone",
+            "certificate_hash": "2d03f65b181ad2762750da026d601d305b7e425f"
+          }
+        },
+        {
+          "client_id": "1055695443506-uq8e7c62amshali7q46game944mkt30d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeUOFabtLbH9VtqyLikhjY0vTqfh1k_Dc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1055695443506-uq8e7c62amshali7q46game944mkt30d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,45 @@
+<resources>
+    <!--Login Activity-->
+    <string name="submit_button">Submit</string>
+    <string name="register_button">Register</string>
+
+    <!--Main Activity-->
+    <string name="app_name">SymPhon-E</string>
+    <string name="create_song_button">Create Song</string>
+    <string name="browse_songs_button">Browse Songs</string>
+
+    <!--Record Song Activity-->
+    <string name="record_button">Record</string>
+    <string name="play_button">Play</string>
+    <string name="stop_button">Stop</string>
+
+    <!--Confirmation Song Activity-->
+    <string-array name="genre">
+        <item>Blues</item>
+        <item>Classical</item>
+        <item>Country</item>
+        <item>Electronic</item>
+        <item>Folk</item>
+        <item>Hip-Hop</item>
+        <item>Jazz</item>
+        <item>Reggae</item>
+        <item>Rock</item>
+        <item>Traditional</item>
+    </string-array>
+
+    <string-array name="instrument">
+        <item>Guitar</item>
+        <item>Trumpet</item>
+        <item>Flute</item>
+        <item>Drums</item>
+        <item>Vocal</item>
+        <item>Triangle</item>
+        <item>Bass</item>
+        <item>Violin</item>
+        <item>Piano</item>
+        <item>Harmonica</item>
+    </string-array>
+
+    <string name="finish_button">Finish</string>
+
+</resources>
