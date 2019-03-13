@@ -112,7 +112,7 @@ public class RecordSongActivity extends AppCompatActivity{
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
         recorder.setOutputFile(OUTPUT_FILE);
 
-        recorder.setMaxDuration(45000);
+        recorder.setMaxDuration(30000);
         recorder.prepare();
         recorder.setOnInfoListener(new MediaRecorder.OnInfoListener() {
             @Override
