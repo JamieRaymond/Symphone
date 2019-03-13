@@ -44,6 +44,7 @@ public class RecordSongActivity extends AppCompatActivity{
         playSongButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 buttonTapped(playSongButton);
+                playSongButton.setEnabled(false);
                 recordSongButton.setEnabled(false);
                 stopSongButton.setEnabled(true);
             }
@@ -123,7 +124,6 @@ public class RecordSongActivity extends AppCompatActivity{
             }
         });
         recorder.start();
-
     }
 
     private void playRecording() throws Exception{
