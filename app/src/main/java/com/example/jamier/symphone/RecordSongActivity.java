@@ -4,15 +4,23 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 
 public class RecordSongActivity extends AppCompatActivity{
+
+    private TextView countDownText;
+    private CountDownTimer countDownTimer;
+    private long timeLeftInMili = 30000; //30secs
+    private String timeLeftText;
+    private boolean timerRunning;
 
     private MediaPlayer mediaPlayer;
     private MediaRecorder recorder;
@@ -23,15 +31,22 @@ public class RecordSongActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_song);
 
+        //COUNTDOWN TEXT//
+        countDownText = findViewById(R.id.timerText);
+
+        //BUTTONS//
         final Button recordSongButton = findViewById(R.id.record_button);
         final Button playSongButton = findViewById(R.id.play_button);
         final Button stopSongButton = findViewById(R.id.stop_button);
 
+        //FILE OUTPUT//
         OUTPUT_FILE = Environment.getExternalStorageDirectory()+"/recording.aac";
 
+        //DISABLE BUTTONS UNTIL RECORD IS PRESSED//
         playSongButton.setEnabled(false);
         stopSongButton.setEnabled(false);
 
+        //RECORD//
         recordSongButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 buttonTapped(recordSongButton);
@@ -40,7 +55,7 @@ public class RecordSongActivity extends AppCompatActivity{
             }
         });
 
-
+        //PLAY//
         playSongButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 buttonTapped(playSongButton);
@@ -50,15 +65,18 @@ public class RecordSongActivity extends AppCompatActivity{
             }
         });
 
+        //STOP//
         stopSongButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 buttonTapped(stopSongButton);
+                stopTimer();
                 stopSongButton.setEnabled(false);
                 playSongButton.setEnabled(true);
                 recordSongButton.setEnabled(true);
             }
         });
 
+        //SUBMIT//
         Button submitSongButton = findViewById(R.id.submit_button);
         submitSongButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -72,6 +90,7 @@ public class RecordSongActivity extends AppCompatActivity{
             case R.id.record_button:
                 try{
                     beginRecording();
+                    startStop();
                     Toast.makeText(getApplicationContext(), "Recording", Toast.LENGTH_LONG).show();
                 }catch (Exception e){
                     e.printStackTrace();
@@ -90,6 +109,7 @@ public class RecordSongActivity extends AppCompatActivity{
             case R.id.stop_button:
                 try{
                     stopPlayback();
+                    countDownText.setText("30");
                     Toast.makeText(getApplicationContext(), "Stopping Playback", Toast.LENGTH_LONG).show();
                 }catch (Exception e){
                     e.printStackTrace();
@@ -158,6 +178,50 @@ public class RecordSongActivity extends AppCompatActivity{
                 e.printStackTrace();
             }
         }
+    }
+
+    public void startStop(){
+        if(timerRunning){
+            stopTimer();
+        }
+        else {
+            startTimer();
+        }
+    }
+
+    public void startTimer(){
+        countDownTimer = new CountDownTimer(timeLeftInMili, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeftInMili = millisUntilFinished;
+                updateTimer();
+            }
+
+            @Override
+            public void onFinish() {
+                countDownText.setText("DONE");
+            }
+        }.start();
+
+        timerRunning = true;
+    }
+
+    public void stopTimer(){
+        countDownTimer.cancel();
+        timerRunning = false;
+        timeLeftInMili = 30000;
+        timeLeftText = "30";
+    }
+
+    public void updateTimer(){
+        int seconds = (int) timeLeftInMili / 1000;
+
+        timeLeftText = "" + seconds;
+        if(seconds < 10){
+            timeLeftText = "0" + timeLeftText;
+        }
+
+        countDownText.setText(timeLeftText);
     }
 
     public void openConfirmationActivity() {
