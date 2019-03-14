@@ -220,7 +220,6 @@ public class RecordSongActivity extends AppCompatActivity{
         if(seconds < 10){
             timeLeftText = "0" + timeLeftText;
         }
-
         countDownText.setText(timeLeftText);
     }
 
