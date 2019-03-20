@@ -106,6 +106,7 @@
 
         <EditText
             android:id="@+id/email"
+            android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="150dp"
@@ -116,6 +117,7 @@
 
         <EditText
             android:id="@+id/confirmemail"
+            android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="150dp"
@@ -126,6 +128,7 @@
 
         <EditText
             android:id="@+id/password"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="150dp"
@@ -136,6 +139,7 @@
 
         <EditText
             android:id="@+id/confirmpassword"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="150dp"
@@ -146,6 +150,7 @@
 
         <EditText
             android:id="@+id/firstname"
+            android:inputType="textPersonName|textCapWords"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="150dp"
@@ -156,6 +161,7 @@
 
         <EditText
             android:id="@+id/lastname"
+            android:inputType="textPersonName|textCapWords"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="150dp"
@@ -166,6 +172,7 @@
 
         <EditText
             android:id="@+id/dob"
+            android:inputType="date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="150dp"
