@@ -17,7 +17,7 @@ public class ConfirmationActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmation);
 
-        Button FinishSongbutton;
+        Button buttonFinishSong;
 
         Spinner spinner1 = findViewById(R.id.spinner1);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.genre, android.R.layout.simple_spinner_item);
@@ -31,15 +31,13 @@ public class ConfirmationActivity extends AppCompatActivity implements AdapterVi
         spinner2.setAdapter(adapter2);
         spinner2.setOnItemSelectedListener(this);
 
-        FinishSongbutton = (Button) findViewById(R.id.finish_button);
-        FinishSongbutton.setOnClickListener(new View.OnClickListener() {
+        buttonFinishSong = findViewById(R.id.finish_button);
+        buttonFinishSong.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     openMainActivity();
                 }
             });
-
-
     }
 
     @Override
