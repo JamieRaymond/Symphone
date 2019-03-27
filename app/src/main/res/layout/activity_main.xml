@@ -50,6 +50,16 @@
             android:layout_marginLeft="@dimen/homepage_button_margin"
             android:text="@string/browse_songs_button"
             android:background="@color/colorPrimaryDark" />
+
+        <Button
+            android:id="@+id/log_out_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:layout_marginRight="325dp"
+            android:layout_marginLeft="20dp"
+            android:text="Logout"
+            android:background="@color/colorPrimaryDark" />
     </LinearLayout>
 
 

@@ -12,13 +12,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.io.File;
 
 public class RecordSongActivity extends AppCompatActivity{
 
     private TextView countDownText;
     private CountDownTimer countDownTimer;
-    private long timeLeftInMili = 30000; //30secs
+    private long timeLeftInMiliseconds = 30000; //30secs
     private String timeLeftText;
     private boolean timerRunning;
 
@@ -31,6 +33,11 @@ public class RecordSongActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_song);
 
+        //Sends user to Login Activity if not logged in//
+        if(FirebaseAuth.getInstance().getCurrentUser() == null){
+            logout();
+        }
+
         //COUNTDOWN TEXT//
         countDownText = findViewById(R.id.timerText);
 
@@ -41,6 +48,8 @@ public class RecordSongActivity extends AppCompatActivity{
 
         //FILE OUTPUT//
         OUTPUT_FILE = Environment.getExternalStorageDirectory()+"/recording.aac";
+
+        //STORAGE REFERENCE
 
         //DISABLE BUTTONS UNTIL RECORD IS PRESSED//
         playSongButton.setEnabled(false);
@@ -190,10 +199,10 @@ public class RecordSongActivity extends AppCompatActivity{
     }
 
     public void startTimer(){
-        countDownTimer = new CountDownTimer(timeLeftInMili, 1000) {
+        countDownTimer = new CountDownTimer(timeLeftInMiliseconds, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                timeLeftInMili = millisUntilFinished;
+                timeLeftInMiliseconds = millisUntilFinished;
                 updateTimer();
             }
 
@@ -209,12 +218,12 @@ public class RecordSongActivity extends AppCompatActivity{
     public void stopTimer(){
         countDownTimer.cancel();
         timerRunning = false;
-        timeLeftInMili = 30000;
+        timeLeftInMiliseconds = 30000;
         timeLeftText = "30";
     }
 
     public void updateTimer(){
-        int seconds = (int) timeLeftInMili / 1000;
+        int seconds = (int) timeLeftInMiliseconds / 1000;
 
         timeLeftText = "" + seconds;
         if(seconds < 10){
@@ -227,6 +236,18 @@ public class RecordSongActivity extends AppCompatActivity{
         Intent intent = new Intent(this, ConfirmationActivity.class);
         startActivity(intent);
 
+    }
+
+    public void logout(){
+        if(FirebaseAuth.getInstance().getCurrentUser() == null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+        else {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
 }
