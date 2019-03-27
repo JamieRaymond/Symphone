@@ -1,18 +1,28 @@
 package com.example.jamier.symphone;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 
@@ -27,6 +37,8 @@ public class RecordSongActivity extends AppCompatActivity{
     private MediaPlayer mediaPlayer;
     private MediaRecorder recorder;
     private String OUTPUT_FILE;
+
+    private StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +62,7 @@ public class RecordSongActivity extends AppCompatActivity{
         OUTPUT_FILE = Environment.getExternalStorageDirectory()+"/recording.aac";
 
         //STORAGE REFERENCE
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         //DISABLE BUTTONS UNTIL RECORD IS PRESSED//
         playSongButton.setEnabled(false);
@@ -89,6 +102,7 @@ public class RecordSongActivity extends AppCompatActivity{
         Button submitSongButton = findViewById(R.id.submit_button);
         submitSongButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                uploadFile();
                 openConfirmationActivity();
             }
         });
@@ -230,6 +244,47 @@ public class RecordSongActivity extends AppCompatActivity{
             timeLeftText = "0" + timeLeftText;
         }
         countDownText.setText(timeLeftText);
+    }
+
+    private void uploadFile(){
+
+
+        Uri file = Uri.fromFile(new File(OUTPUT_FILE));
+
+        if(file != null){
+
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+
+            storageReference = storageReference.child("audio/recording.aac"); // <-- Have to get song name here.
+            storageReference.putFile(file)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "File Uploaded.", Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            progressDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
+                            progressDialog.setMessage((int) progress + "% Uploaded ");
+                        }
+                    })
+            ;
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "Cannot Upload. No File Found.", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void openConfirmationActivity() {
