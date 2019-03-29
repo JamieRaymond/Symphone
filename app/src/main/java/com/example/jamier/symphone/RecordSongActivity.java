@@ -12,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -27,6 +29,8 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 
 public class RecordSongActivity extends AppCompatActivity{
+
+    private EditText songName;
 
     private TextView countDownText;
     private CountDownTimer countDownTimer;
@@ -52,6 +56,9 @@ public class RecordSongActivity extends AppCompatActivity{
 
         //COUNTDOWN TEXT//
         countDownText = findViewById(R.id.timerText);
+
+        //SONG NAME//
+        songName = findViewById(R.id.song_name);
 
         //BUTTONS//
         final Button recordSongButton = findViewById(R.id.record_button);
@@ -103,7 +110,7 @@ public class RecordSongActivity extends AppCompatActivity{
         submitSongButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 uploadFile();
-                openConfirmationActivity();
+                openMainActivity();
             }
         });
     }
@@ -257,7 +264,9 @@ public class RecordSongActivity extends AppCompatActivity{
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            storageReference = storageReference.child("audio/recording.aac"); // <-- Have to get song name here.
+            FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+
+            storageReference = storageReference.child(currentFirebaseUser.getUid()+"/"+songName.getText()+".acc"); // <-- Have to get song name here.
             storageReference.putFile(file)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -287,8 +296,8 @@ public class RecordSongActivity extends AppCompatActivity{
         }
     }
 
-    public void openConfirmationActivity() {
-        Intent intent = new Intent(this, ConfirmationActivity.class);
+    public void openMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
 
     }

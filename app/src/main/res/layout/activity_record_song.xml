@@ -37,6 +37,16 @@
             android:textSize="90sp"
             android:text="30" />
 
+        <EditText
+            android:id="@+id/song_name"
+            android:hint="Enter Song Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            />
+
         <Button
             android:id="@+id/record_button"
             android:layout_width="match_parent"
