@@ -266,7 +266,7 @@ public class RecordSongActivity extends AppCompatActivity{
 
             FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
 
-            storageReference = storageReference.child(currentFirebaseUser.getUid()+"/"+songName.getText()+".acc"); // <-- Have to get song name here.
+            storageReference = storageReference.child(currentFirebaseUser.getUid()+"/"+songName.getText()+"/"+"recording1.aac"); // <-- Have to get song name here.
             storageReference.putFile(file)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override

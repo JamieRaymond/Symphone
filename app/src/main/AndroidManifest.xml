@@ -14,16 +14,16 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".BrowseSongs"></activity>
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity"/>
-        <activity android:name=".ConfirmationActivity" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".RecordSongActivity" />
         <activity android:name=".MainActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

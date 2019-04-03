@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
     private Button recordSongButton;
+    private Button browseSongsButton;
     private Button logOutButton;
 
     @Override
@@ -29,6 +30,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        browseSongsButton = findViewById(R.id.browse_songs_button);
+        browseSongsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openBrowseSongsActivity();
+            }
+        });
+
         logOutButton = findViewById(R.id.log_out_button);
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void openRecordSongActivity() {
         Intent intent = new Intent(this, RecordSongActivity.class);
+        startActivity(intent);
+
+    }
+
+    public void openBrowseSongsActivity() {
+        Intent intent = new Intent(this, BrowseSongs.class);
         startActivity(intent);
 
     }

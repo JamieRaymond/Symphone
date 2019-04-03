@@ -1,5 +1,6 @@
 package com.example.jamier.symphone;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView signUp;
     FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,10 @@ public class LoginActivity extends AppCompatActivity {
             buttonLogIn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    //final ProgressDialog progressDialog = new ProgressDialog(this);
+                    //progressDialog.setTitle("Logging In...");
+                    //progressDialog.show();
+
                     String userEmail = loginEmailId.getText().toString();
                     String userPaswd = logInPass.getText().toString();
                     if (userEmail.isEmpty()) {
@@ -78,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                         });
+
                     } else {
                         Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     }
