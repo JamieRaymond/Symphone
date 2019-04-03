@@ -26,26 +26,25 @@
             android:id="@+id/timerText"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="@dimen/homepage_spacing"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
             android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="@dimen/homepage_spacing"
+            android:layout_marginRight="50dp"
             android:fontFamily="sans-serif-condensed"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
+            android:text="30"
             android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
             android:textSize="90sp"
-            android:text="30" />
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/song_name"
-            android:hint="Enter Song Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
             android:layout_marginLeft="100dp"
             android:layout_marginRight="100dp"
-            android:layout_gravity="center_vertical|center_horizontal"
-            />
+            android:hint="Enter Song Name" />
 
         <Button
             android:id="@+id/record_button"

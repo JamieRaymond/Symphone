@@ -34,32 +34,31 @@
             android:id="@+id/create_song_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/homepage_button_margin"
             android:layout_marginTop="@dimen/homepage_spacing"
             android:layout_marginRight="@dimen/homepage_button_margin"
-            android:layout_marginLeft="@dimen/homepage_button_margin"
-            android:text="@string/create_song_button"
             android:background="@color/colorPrimaryDark"
-            />
+            android:text="@string/create_song_button" />
 
         <Button
             android:id="@+id/browse_songs_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/homepage_button_margin"
             android:layout_marginTop="@dimen/homepage_spacing"
             android:layout_marginRight="@dimen/homepage_button_margin"
-            android:layout_marginLeft="@dimen/homepage_button_margin"
-            android:text="@string/browse_songs_button"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/browse_songs_button" />
 
         <Button
             android:id="@+id/log_out_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="200dp"
             android:layout_marginRight="325dp"
-            android:layout_marginLeft="20dp"
-            android:text="Logout"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/colorPrimaryDark"
+            android:text="Logout" />
     </LinearLayout>
 
 

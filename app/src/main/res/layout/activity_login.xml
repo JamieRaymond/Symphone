@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white"
     tools:context=".MainActivity">
 
@@ -28,8 +28,7 @@
             android:layout_margin="15dp"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:textColor="@color/colorPrimary"
-            />
+            android:textColor="@color/colorPrimary" />
 
         <EditText
             android:id="@+id/loginpaswd"
@@ -38,16 +37,16 @@
             android:layout_margin="15dp"
             android:hint="Password"
             android:inputType="textPassword"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary" />
 
         <Button
             android:id="@+id/btnLogIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
+            android:background="@color/colorPrimaryDark"
             android:text="Log In"
-            android:textSize="20dp"
-            android:background="@color/colorPrimaryDark"/>
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/TVSignIn"
@@ -55,8 +54,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:text="New User? Register Here"
-            android:textSize="20dp"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary"
+            android:textSize="20dp" />
     </LinearLayout>
 
 
