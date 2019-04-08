@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -273,6 +275,12 @@ public class RecordSongActivity extends AppCompatActivity{
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
                             Toast.makeText(getApplicationContext(), "File Uploaded.", Toast.LENGTH_LONG).show();
+
+                            //Database Stuff
+                            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference myRef = database.getReference();
+                            String downloadUrl = storageReference.getDownloadUrl().toString();
+                            myRef.child("Song_Name").child(String.valueOf(songName.getText())).setValue(downloadUrl);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
