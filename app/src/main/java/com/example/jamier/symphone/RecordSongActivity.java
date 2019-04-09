@@ -10,6 +10,8 @@ import android.os.CountDownTimer;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.mbms.FileInfo;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,8 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -266,21 +270,36 @@ public class RecordSongActivity extends AppCompatActivity{
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+            FirebaseUser currentFireBaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-            storageReference = storageReference.child(currentFirebaseUser.getUid()+"/"+songName.getText()+"/"+"recording1.aac"); // <-- Have to get song name here.
+            storageReference = storageReference.child(currentFireBaseUser.getUid()+"/"+songName.getText()+"/"+"recording1.aac"); // <-- Have to get song name here.
             storageReference.putFile(file)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
                             Toast.makeText(getApplicationContext(), "File Uploaded.", Toast.LENGTH_LONG).show();
+                            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String downloadUrl = uri.toString();
+                                    Log.d("TAG",downloadUrl);
 
-                            //Database Stuff
-                            final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                            DatabaseReference myRef = database.getReference();
-                            String downloadUrl = storageReference.getDownloadUrl().toString();
-                            myRef.child("Song_Name").child(String.valueOf(songName.getText())).setValue(downloadUrl);
+                                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                    DatabaseReference myRef = database.getReference();
+                                    myRef.child("Song_Name").child(songName.getText().toString()).setValue(downloadUrl);
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+
+                            //final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            //DatabaseReference myRef = database.getReference();
+                            //String downloadUrl = storageReference.getDownloadUrl().toString();
+                            //myRef.child("Song_Name").child(songName.getText().toString()).setValue(downloadUrl);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -296,8 +315,7 @@ public class RecordSongActivity extends AppCompatActivity{
                             double progress = (100.0 * taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
                             progressDialog.setMessage((int) progress + "% Uploaded ");
                         }
-                    })
-            ;
+                    });
         }
         else{
             Toast.makeText(getApplicationContext(), "Cannot Upload. No File Found.", Toast.LENGTH_LONG).show();
